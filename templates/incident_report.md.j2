@@ -1,0 +1,38 @@
+# Incident {{ incident.incident_id }}
+
+**Source:** {{ incident.source_alert.source }}
+**Type:** {{ incident.source_alert.type }}
+**Severity:** {{ incident.triage.severity_label }} ({{ incident.triage.severity_score }})
+**Suppressed:** {{ incident.triage.suppressed }}
+**Asset:** {{ incident.asset.hostname }} ({{ incident.asset.ip }})
+
+---
+
+## Indicators
+| Type | Value | Verdict | Score | Allowlisted |
+|------|--------|----------|--------|--------------|
+{% for i in incident.indicators -%}
+| {{ i.type }} | {{ i.value }} | {{ i.risk.verdict }} | {{ i.risk.score }} | {{ i.allowlisted }} |
+{% endfor %}
+
+---
+
+## MITRE ATT&CK Techniques
+{% if incident.mitre %}
+{{ incident.mitre }}
+{% else %}
+_No MITRE techniques found._
+{% endif %}
+
+---
+
+## Actions
+{% if incident.actions %}
+| Type | Target | Result | Hostname | IP | TS |
+|------|--------|--------|----------|----|----|
+{% for a in incident.actions -%}
+| {{ a.type }} | {{ a.target }} | {{ a.result }} | {{ a.asset_hostname or "" }} | {{ a.asset_ip or "" }} | {{ a.ts }} |
+{% endfor %}
+{% else %}
+_No automated actions executed._
+{% endif %}

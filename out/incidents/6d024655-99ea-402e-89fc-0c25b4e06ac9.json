@@ -1,0 +1,132 @@
+{
+  "incident_id": "6d024655-99ea-402e-89fc-0c25b4e06ac9",
+  "source_alert": {
+    "alert_id": "sen-001",
+    "source": "sentinel",
+    "type": "CredentialAccess",
+    "created_at": "2025-08-20T14:03:10Z",
+    "asset": {
+      "device_id": "dev-9001",
+      "hostname": "HR-LAPTOP-22",
+      "ip": "10.2.3.44"
+    },
+    "indicators": {
+      "ipv4": [
+        "1.2.3.4"
+      ],
+      "domains": [
+        "bad.example.net"
+      ],
+      "urls": [
+        "http://bad.example.net/login"
+      ],
+      "sha256": [
+        "7b1f4c2d16e0a0b43cbae2f9a9c2dd7e2bb3a0aaad6c0ad66b341f8b7deadbe0"
+      ]
+    },
+    "raw": {
+      "provider": "azure",
+      "workspace": "prod",
+      "rule_id": "AZ-CRED-77"
+    }
+  },
+  "asset": {
+    "device_id": "dev-9001",
+    "hostname": "HR-LAPTOP-22",
+    "ip": "10.2.3.44"
+  },
+  "indicators": [
+    {
+      "type": "ipv4",
+      "value": "1.2.3.4",
+      "risk": {
+        "verdict": "suspicious",
+        "score": 80,
+        "sources": [
+          "anomali"
+        ]
+      },
+      "allowlisted": false
+    },
+    {
+      "type": "domains",
+      "value": "bad.example.net",
+      "risk": {
+        "verdict": "malicious",
+        "score": 92,
+        "sources": [
+          "defender_ti"
+        ]
+      },
+      "allowlisted": false
+    },
+    {
+      "type": "urls",
+      "value": "http://bad.example.net/login",
+      "risk": {
+        "verdict": "unknown",
+        "score": 0,
+        "sources": []
+      },
+      "allowlisted": false
+    },
+    {
+      "type": "sha256",
+      "value": "7b1f4c2d16e0a0b43cbae2f9a9c2dd7e2bb3a0aaad6c0ad66b341f8b7deadbe0",
+      "risk": {
+        "verdict": "malicious",
+        "score": 95,
+        "sources": [
+          "reversinglabs"
+        ]
+      },
+      "allowlisted": false
+    }
+  ],
+  "triage": {
+    "base_score": 75,
+    "severity_score": 100,
+    "severity_label": "Critical",
+    "malicious_iocs": 2,
+    "suspicious_iocs": 1,
+    "allowlisted_iocs": 0,
+    "tags": [],
+    "suppressed": false
+  },
+  "mitre": [
+    "T1056",
+    "T1555"
+  ],
+  "actions": [
+    {
+      "type": "isolate",
+      "target": "device:dev-9001",
+      "result": "isolated",
+      "asset_ip": "10.2.3.44",
+      "asset_hostname": "HR-LAPTOP-22",
+      "ts": "2025-11-08T00:17:21.091084+00:00"
+    }
+  ],
+  "timeline": [
+    {
+      "stage": "ingest",
+      "ts": "2025-11-08T00:17:21.085289+00:00",
+      "details": "Alert ingested and normalized from alerts/sentinel.json"
+    },
+    {
+      "stage": "enrich",
+      "ts": "2025-11-08T00:17:21.088673+00:00",
+      "details": "Indicators enriched using connectors from configs/connectors.yml"
+    },
+    {
+      "stage": "triage",
+      "ts": "2025-11-08T00:17:21.089834+00:00",
+      "details": "Triage completed. Score=100 (Critical), Suppressed=False"
+    },
+    {
+      "stage": "respond",
+      "ts": "2025-11-08T00:17:21.091084+00:00",
+      "details": "Response executed (simulated). Actions=1"
+    }
+  ]
+}
