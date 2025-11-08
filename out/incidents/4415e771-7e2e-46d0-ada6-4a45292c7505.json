@@ -1,0 +1,91 @@
+{
+  "incident_id": "4415e771-7e2e-46d0-ada6-4a45292c7505",
+  "source_alert": {
+    "alert_id": "sumo-abc",
+    "source": "sumologic",
+    "type": "Beaconing",
+    "created_at": "2025-08-21T08:11:54Z",
+    "asset": {
+      "device_id": "dev-4421",
+      "hostname": "ENG-DESKTOP-07",
+      "ip": "10.9.5.23"
+    },
+    "indicators": {
+      "ipv4": [
+        "5.6.7.8"
+      ],
+      "domains": [],
+      "urls": [
+        "http://cnc.evil.example/ping"
+      ],
+      "sha256": []
+    },
+    "raw": {
+      "collector": "edge-4",
+      "rule_id": "SM-BEACON-12"
+    }
+  },
+  "asset": {
+    "device_id": "dev-4421",
+    "hostname": "ENG-DESKTOP-07",
+    "ip": "10.9.5.23"
+  },
+  "indicators": [
+    {
+      "type": "ipv4",
+      "value": "5.6.7.8",
+      "risk": {
+        "verdict": "unknown",
+        "score": 0,
+        "sources": []
+      },
+      "allowlisted": false
+    },
+    {
+      "type": "urls",
+      "value": "http://cnc.evil.example/ping",
+      "risk": {
+        "verdict": "unknown",
+        "score": 0,
+        "sources": []
+      },
+      "allowlisted": false
+    }
+  ],
+  "triage": {
+    "base_score": 65,
+    "severity_score": 65,
+    "severity_label": "Medium",
+    "malicious_iocs": 0,
+    "suspicious_iocs": 0,
+    "allowlisted_iocs": 0,
+    "tags": [],
+    "suppressed": false
+  },
+  "mitre": [
+    "T1071"
+  ],
+  "actions": [],
+  "timeline": [
+    {
+      "stage": "ingest",
+      "ts": "2025-11-08T00:51:33.418676+00:00",
+      "details": "Alert ingested and normalized from alerts/sumologic.json"
+    },
+    {
+      "stage": "enrich",
+      "ts": "2025-11-08T00:51:33.421578+00:00",
+      "details": "Indicators enriched using connectors from configs/connectors.yml"
+    },
+    {
+      "stage": "triage",
+      "ts": "2025-11-08T00:51:33.422494+00:00",
+      "details": "Triage completed. Score=65 (Medium), Suppressed=False"
+    },
+    {
+      "stage": "respond",
+      "ts": "2025-11-08T00:51:33.423238+00:00",
+      "details": "Response executed (simulated). Actions=0"
+    }
+  ]
+}
