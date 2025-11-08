@@ -37,23 +37,43 @@ The main workflow follows four stages: **Ingestion → Enrichment → Triage →
 
 ## Lógica para aislar máquina / Machine Isolation Logic
 
-- Si el **puntaje de severidad** (`severity_score`) es **High (70–89)** o **Critical (90–100)** y no está suprimido (`suppressed=False`):*If the **severity score** (`severity_score`) is **High (70–89)** or **Critical (90–100)** and it is not suppressed (`suppressed=False`):*→ Se marca como **acción inmediata / immediate action required**→ El SOC debe **aislar la máquina afectada / isolate the affected machine**
-- Si la severidad es **Medium (40–69)**:*If the severity is **Medium (40–69)**:*→ **Monitoreo intensivo / intensive monitoring**→ No se aísla automáticamente / no auto-isolation
-- Si la severidad es **Low (1–39)** o **Suppressed (0)**:
-  *If the severity is **Low (1–39)** or **Suppressed (0)**:*
+### Alta o Crítica / High or Critical
+
+- **Condición / Condition**:
+  Si el **puntaje de severidad** (`severity_score`) es **High (70–89)** o **Critical (90–100)** y no está suprimido (`suppressed=False`).
+  *If the **severity score** (`severity_score`) is **High (70–89)** or **Critical (90–100)** and it is not suppressed (`suppressed=False`).*
+- **Acción / Action:**
+  → Se marca como **acción inmediata / immediate action required**
+  → El SOC debe **aislar la máquina afectada / isolate the affected machine**
+
+### Media / Medium
+
+- **Condición / Condition**:
+  Si la severidad es **Medium (40–69)**.
+  *If the severity is **Medium (40–69)**.*
+- **Acción / Action:**
+  → Monitoreo intensivo / intensive monitoring
+  → No se aísla automáticamente / no auto-isolation
+
+### Baja o Suprimida / Low or Suppressed
+
+- **Condición / Condition:**
+  Si la severidad es **Low (1–39)** o **Suppressed (0)**.
+  *If the severity is **Low (1–39)** or **Suppressed (0)**.*
+- **Acción / Action:**
   → Solo se registra para auditoría / logged for audit
   → No se toman acciones automáticas / no automatic actions
 
 ## Salidas del script / Script Outputs
 
-- `incident["triage"]`: Contiene / Contains:
+- `incident["triage"]`:Contiene / Contains:
 
   - `base_score`
   - `severity_score`
   - `severity_label` (Low, Medium, High, Critical, Suppressed)
   - Conteo de IOCs / IOC counts
   - `tags` y `suppressed`
-- `incident["timeline"]`:Lista con etapas del procesamiento y timestamps UTC / List of processing stages and UTC timestamps.
+- `incident["timeline"]`:Lista con etapas del procesamiento y timestamps UTC /List of processing stages and UTC timestamps.
 - Archivos generados en `output/` / Files generated in `output/`:
 
   - JSON con alertas triageadas / JSON with triaged alerts
@@ -94,6 +114,7 @@ python3 main.py alerts/sentinel.json
 
 ## Estructura del proyecto / Project Structure
 
+```bash
 SOAR_Samples/
 ├─ main.py              # Script principal / Main script
 ├─ requirements.txt     # Librerías necesarias / Required libraries
@@ -103,3 +124,4 @@ SOAR_Samples/
 ├─ alerts/              # Archivos JSON/YAML de entrada / Input alerts
 ├─ templates/           # Plantillas Jinja2 / Jinja2 templates
 └─ output/              # Archivos generados / Output files
+```
