@@ -68,7 +68,7 @@ El script procesa las alertas siguiendo estas cuatro etapas:
 1. Clonar el repositorio:
 
 ```bash
-git clone https://https://github.com/DanielRuiz96/SOAR_Samples.git
+git clone https://github.com/DanielRuiz96/SOAR_Samples.git
 cd SOAR_Samples
 ```
 
