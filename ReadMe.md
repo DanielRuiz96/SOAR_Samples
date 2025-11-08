@@ -68,8 +68,8 @@ El script procesa las alertas siguiendo estas cuatro etapas:
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu-usuario/tu-proyecto.git
-cd tu-proyecto
+git clone https://https://github.com/DanielRuiz96/SOAR_Samples.git
+cd SOAR_Samples
 ```
 
 2. Crear un entorno virtual:
